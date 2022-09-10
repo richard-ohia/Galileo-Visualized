@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="visualization-style.css">
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="visualization-control.js" defer></script>
+        <title>Galileo-Visualized</title>
+    </head>
+    <body>
+        <header>
+            <div class="logo">Galileo-Visualized</div>
+            <nav>
+                <ul>
+                    <li><a href="../home-page/home.html">Home</a></li>
+                    <li><a href="../help-page/help.html">Credits</a></li>
+                    <li><a href="../comparison-page/comparison.html">Comparisons</a></li>
+                    <li><a href="../visualization-page/visualization.html">Visualizations</a></li>
+                </ul>
+            </nav> 
+        </header>
+        <hr>
+        <main>
+            <form action="" class="form-box">
+                <label for="section">Select a Section: </label>
+                <input type="text" name="section" id="section" required>
+                <label for="type-class">Type: </label>
+                <select id="type-class">
+                    <option value="RawFreqLibrary">Raw Frequency</option>
+                    <option value="RelFreqLibrary">Relative Frequency</option>
+                    <option value="EarliestAppearance">Oldest Use</option>
+                    <option value="RP">Part of Speech</option>
+                    <option value="CC">Tense</option>
+                    <option value="IN">IN</option>
+                    <option value="VB">VB</option>
+                    <option value="PRP">PRP</option>
+
+                </select>
+                <!-- <input type="button" value="Apply" id="button-el"> <button id="button-el">Apply</button> -->
+                <button type="button" id="button-el">Apply</button>
+            </form>
+            <div id="container">
+                <div class = "image-div">
+                    <p class="image-description">Raw Frequency: </p>
+                    <img src="../data/raw-frequency.png" class="image-vis">
+                </div>
+                <div class = "image-div">
+                    <p class="image-description">Relative Frequency: </p>
+                    <img src="../data/rel-frequency.png" class="image-vis">
+                </div>
+                <div class = "image-div">
+                    <p class="image-description">Oldest Use: </p>
+                    <img src="../data/oldest-use.png" class="image-vis">
+                </div>
+            </div>
+            <div id="visual" style="position: relative; align-self: center; margin-top: 10px;"></div>
+        </main>
+        <hr>
+        <footer>
+            <p>CC-BY-NC-SA Crystal Hall</p>
+        </footer>
+    </body>
+</html>
