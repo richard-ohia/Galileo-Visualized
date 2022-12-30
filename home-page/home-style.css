@@ -35,11 +35,6 @@ nav select {
     display: none;
 }
 
-@media (max-width : 700px) {
-    nav ul {display: none;}
-    nav select {display: inline;}
-}
-
 nav {
     display: flex;
     flex : 1;
