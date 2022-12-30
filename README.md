@@ -2,6 +2,9 @@
 Visualising Galileo Galilei's The Assayer
 <br>
 <br>
+Lead researcher: Crystal Hall,  Associate Professor of Digital Humanities in the Digital and Computational Studies Program at Bowdoin College.
+<br>
+<br>
 The site is visible at: https://richard-ohia.github.io/Galileo-Visualized/
 <br>
 <br>
