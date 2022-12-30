@@ -56,10 +56,12 @@ nav ul li a {
     cursor : pointer;
     margin-right: 10px;
 }
+img {
+    float: right;
+}
 main {
     margin: 4%;
     min-height: calc(100vh - 250px); /* Makes sure the page is filled*/
-    text-align: center;
 }
 
 

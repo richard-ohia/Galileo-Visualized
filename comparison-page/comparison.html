@@ -6,6 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="comparison-style.css">
         <title>Galileo-Visualized</title>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="comparison-control.js" defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     </head>
     <body>
         <header>
@@ -33,23 +36,364 @@
                     <input type="text" name="section2" id="section2" required>
                 </div>
                 <div>
-                    <label for="word-class">Word Class: </label>
+                    <label for="type-class">Type: </label>
                     <br>
-                    <select id="word-class">
-                        <option value="NN">NN</option>
-                        <option value="JJ">JJ</option>
-                        <option value="RP">RP</option>
-                        <option value="CC">CC</option>
-                        <option value="IN">IN</option>
-                        <option value="VB">VB</option>
-                        <option value="PRP">PRP</option>
-
-                      </select>
+                    <select id="type-class">
+                    <option value="RawSaggFreq">Raw Frequency</option>
+                    <option value="RelSaggFreq">Relative Frequency</option>
+                    <option value="EarliestAppearance">Oldest Use</option>
+                    <option value="WordClass">Part of Speech</option>
+                    <option value="Tense">Tense</option>
+                    <option value="NamesTextsAppearedIn">Authors</option>
+                    </select>
+                </div>
+                <div id="PartOfSpeech" style="display: none;">
+                    <br>
+                    <input type="checkbox" id="JJ" name="PartOfSpeech" value="JJ">
+                    <label for="JJ">JJ</label>
+                    <br>
+                    <input type="checkbox" id="NN" name="PartOfSpeech" value="NN">
+                    <label for="NN">NN</label>
+                    <br>
+                    <input type="checkbox" id="VB" name="PartOfSpeech" value="VB">
+                    <label for="VB">VB</label>
+                    <br>
+                    <input type="checkbox" id="CC" name="PartOfSpeech" value="CC">
+                    <label for="CC">CC</label>
+                    <br>
+                    <input type="checkbox" id="JJS" name="PartOfSpeech" value="JJS">
+                    <label for="JJS">JJS</label>
+                    <br>
+                    <input type="checkbox" id="SYM" name="PartOfSpeech" value="SYM">
+                    <label for="SYM">SYM</label>
+                    <br>
+                    <input type="checkbox" id="IN" name="PartOfSpeech" value="IN">
+                    <label for="IN">IN</label>
+                    <br>
+                    <input type="checkbox" id="RP" name="PartOfSpeech" value="RP">
+                    <label for="RP">RP</label>
+                    <br>
+                    <input type="checkbox" id="NA" name="PartOfSpeech" value="NA">
+                    <label for="NA">NA</label>
+                    <br>
+                    <input type="checkbox" id="RB" name="PartOfSpeech" value="RB">
+                    <label for="RB">RB</label>
+                    <br>
+                    <input type="checkbox" id="PRP" name="PartOfSpeech" value="PRP">
+                    <label for="PRP">PRP</label>
+                    <br>
+                    <input type="checkbox" id="UH" name="PartOfSpeech" value="UH">
+                    <label for="UH">UH</label>
+                    <br>
+                    <input type="checkbox" id="DT" name="PartOfSpeech" value="DT">
+                    <label for="DT">DT</label>
+                    <br>
+                    <input type="checkbox" id="CD" name="PartOfSpeech" value="CD">
+                    <label for="CD">CD</label>
+                    <br>
+                    <input type="checkbox" id="FW" name="PartOfSpeech" value="FW">
+                    <label for="FW">FW</label>
+                    <br>  
+                </div>
+                <div id="Tense" style="display: none;">
+                    <br>
+                    <input type="checkbox" id="none" name="Tense" value="none">
+                    <label for="none">none</label>
+                    <br>
+                    <input type="checkbox" id="present" name="Tense" value="present">
+                    <label for="present">present</label>
+                    <br>
+                    <input type="checkbox" id="participle" name="Tense" value="participle">
+                    <label for="participle">participle</label>
+                    <br>
+                    <input type="checkbox" id="NA" name="Tense" value="NA">
+                    <label for="NA">NA</label>
+                    <br>
+                    <input type="checkbox" id="infinitive" name="Tense" value="infinitive">
+                    <label for="infinitive">infinitive</label>
+                    <br>
+                    <input type="checkbox" id="subjunctive" name="Tense" value="subjunctive">
+                    <label for="subjunctive">subjunctive</label>
+                    <br>
+                    <input type="checkbox" id="gerund" name="Tense" value="gerund">
+                    <label for="gerund">gerund</label>
+                    <br>
+                    <input type="checkbox" id="remote" name="Tense" value="remote">
+                    <label for="remote">remote</label>
+                    <br>
+                    <input type="checkbox" id="presProgressive" name="Tense" value="presProgressive">
+                    <label for="presProgressive">presProgressive</label>
+                    <br>
+                    <input type="checkbox" id="imperfect" name="Tense" value="imperfect">
+                    <label for="imperfect">imperfect</label>
+                    <br>
+                    <input type="checkbox" id="impSubjunctive" name="Tense" value="impSubjunctive">
+                    <label for="impSubjunctive">impSubjunctive</label>
+                    <br>
+                    <input type="checkbox" id="conditional" name="Tense" value="conditional">
+                    <label for="conditional">conditional</label>
+                    <br>
+                    <input type="checkbox" id="future" name="Tense" value="future">
+                    <label for="future">future</label>
+                    <br>  
+                </div>
+                <div id="Names" style="display: none;">
+                    <br>
+                    <input type="checkbox" id="Select-All" name="Select-All" value="Select-All">
+                    <label for="Select-All">Select All</label>
+                    <br>
+                    <input type="checkbox" id="Acqua_Galileo" name="Names" value="Acqua_Galileo">
+                    <label for="Acqua_Galileo">Acqua_Galileo</label>
+                    <br>
+                    <input type="checkbox" id="AcqueCorrenti_Castelli" name="Names" value="AcqueCorrenti_Castelli">
+                    <label for="AcqueCorrenti_Castelli">AcqueCorrenti_Castelli</label>
+                    <br>
+                    <input type="checkbox" id="Adone_Renieri" name="Names" value="Adone_Renieri">
+                    <label for="Adone_Renieri">Adone_Renieri</label>
+                    <br>
+                    <input type="checkbox" id="Agricoltura_Crescenzi" name="Names" value="Agricoltura_Crescenzi">
+                    <label for="Agricoltura_Crescenzi">Agricoltura_Crescenzi</label>
+                    <br>
+                    <input type="checkbox" id="Algebra_Bombelli" name="Names" value="Algebra_Bombelli">
+                    <label for="Algebra_Bombelli">Algebra_Bombelli</label>
+                    <br>
+                    <input type="checkbox" id="AmoreClitofonte_Tatius" name="Names" value="AmoreClitofonte_Tatius">
+                    <label for="AmoreClitofonte_Tatius">AmoreClitofonte_Tatius</label>
+                    <br>
+                    <input type="checkbox" id="AmorPudico_Cicognini" name="Names" value="AmorPudico_Cicognini">
+                    <label for="AmorPudico_Cicognini">AmorPudico_Cicognini</label>
+                    <br>
+                    <input type="checkbox" id="AnatomiaCeleste_Diedo" name="Names" value="AnatomiaCeleste_Diedo">
+                    <label for="AnatomiaCeleste_Diedo">AnatomiaCeleste_Diedo</label>
+                    <br>
+                    <input type="checkbox" id="AssembleaCeleste_Rho" name="Names" value="AssembleaCeleste_Rho">
+                    <label for="AssembleaCeleste_Rho">AssembleaCeleste_Rho</label>
+                    <br>
+                    <input type="checkbox" id="Balletto_Paggi" name="Names" value="Balletto_Paggi">
+                    <label for="Balletto_Paggi">Balletto_Paggi</label>
+                    <br>
+                    <input type="checkbox" id="Buffoni_Costa" name="Names" value="Buffoni_Costa">
+                    <label for="Buffoni_Costa">Buffoni_Costa</label>
+                    <br>
+                    <input type="checkbox" id="CantoContrapunti_Galilei" name="Names" value="CantoContrapunti_Galilei">
+                    <label for="CantoContrapunti_Galilei">CantoContrapunti_Galilei</label>
+                    <br>
+                    <input type="checkbox" id="Clomira_Magagnati" name="Names" value="Clomira_Magagnati">
+                    <label for="Clomira_Magagnati">Clomira_Magagnati</label>
+                    <br>
+                    <input type="checkbox" id="Coltiuazione_Magazzini" name="Names" value="Coltiuazione_Magazzini">
+                    <label for="Coltiuazione_Magazzini">Coltiuazione_Magazzini</label>
+                    <br>
+                    <input type="checkbox" id="ComediaDante_Vellutello" name="Names" value="ComediaDante_Vellutello">
+                    <label for="ComediaDante_Vellutello">ComediaDante_Vellutello</label>
+                    <br>
+                    <input type="checkbox" id="CommediaDialogo_Manetti" name="Names" value="CommediaDialogo_Manetti">
+                    <label for="CommediaDialogo_Manetti">CommediaDialogo_Manetti</label>
+                    <br>
+                    <input type="checkbox" id="CommentoDante_Landino" name="Names" value="CommentoDante_Landino">
+                    <label for="CommentoDante_Landino">CommentoDante_Landino</label>
+                    <br>
+                    <input type="checkbox" id="Compendio_Doni" name="Names" value="Compendio_Doni">
+                    <label for="Compendio_Doni">Compendio_Doni</label>
+                    <br>
+                    <input type="checkbox" id="Consideratione_Capra" name="Names" value="Consideratione_Capra">
+                    <label for="Consideratione_Capra">Consideratione_Capra</label>
+                    <br>
+                    <input type="checkbox" id="Considerationi_Malacreta" name="Names" value="Considerationi_Malacreta">
+                    <label for="Considerationi_Malacreta">Considerationi_Malacreta</label>
+                    <br>
+                    <input type="checkbox" id="Considerazioni_Grazia" name="Names" value="Considerazioni_Grazia">
+                    <label for="Considerazioni_Grazia">Considerazioni_Grazia</label>
+                    <br>
+                    <input type="checkbox" id="Considerazioni_Mauri" name="Names" value="Considerazioni_Mauri">
+                    <label for="Considerazioni_Mauri">Considerazioni_Mauri</label>
+                    <br>
+                    <input type="checkbox" id="Considerazioni_Pannochieschi" name="Names" value="Considerazioni_Pannochieschi">
+                    <label for="Considerazioni_Pannochieschi">Considerazioni_Pannochieschi</label>
+                    <br>
+                    <input type="checkbox" id="ControMoto_DelleColombe" name="Names" value="ControMoto_DelleColombe">
+                    <label for="ControMoto_DelleColombe">ControMoto_DelleColombe</label>
+                    <br>
+                    <input type="checkbox" id="DellaMagiaNaturale_Porta" name="Names" value="DellaMagiaNaturale_Porta">
+                    <label for="DellaMagiaNaturale_Porta">DellaMagiaNaturale_Porta</label>
+                    <br>
+                    <input type="checkbox" id="DellaPittura_Dolce" name="Names" value="DellaPittura_Dolce">
+                    <label for="DellaPittura_Dolce">DellaPittura_Dolce</label>
+                    <br>
+                    <input type="checkbox" id="DelleStelleFisse_Piccolomini" name="Names" value="DelleStelleFisse_Piccolomini">
+                    <label for="DelleStelleFisse_Piccolomini">DelleStelleFisse_Piccolomini</label>
+                    <br>
+                    <input type="checkbox" id="DelMezzo_Agucchi" name="Names" value="DelMezzo_Agucchi">
+                    <label for="DelMezzo_Agucchi">DelMezzo_Agucchi</label>
+                    <br>
+                    <input type="checkbox" id="Dialogo_Albergotti" name="Names" value="Dialogo_Albergotti">
+                    <label for="Dialogo_Albergotti">Dialogo_Albergotti</label>
+                    <br>
+                    <input type="checkbox" id="Dialogo_Panezio" name="Names" value="Dialogo_Panezio">
+                    <label for="Dialogo_Panezio">Dialogo_Panezio</label>
+                    <br>
+                    <input type="checkbox" id="DialogoMusica_Galilei" name="Names" value="DialogoMusica_Galilei">
+                    <label for="DialogoMusica_Galilei">DialogoMusica_Galilei</label>
+                    <br>
+                    <input type="checkbox" id="Difesa_Chiaramonte" name="Names" value="Difesa_Chiaramonte">
+                    <label for="Difesa_Chiaramonte">Difesa_Chiaramonte</label>
+                    <br>
+                    <input type="checkbox" id="Discorso_Bartolini" name="Names" value="Discorso_Bartolini">
+                    <label for="Discorso_Bartolini">Discorso_Bartolini</label>
+                    <br>
+                    <input type="checkbox" id="Discorso_Lorenzini" name="Names" value="Discorso_Lorenzini">
+                    <label for="Discorso_Lorenzini">Discorso_Lorenzini</label>
+                    <br>
+                    <input type="checkbox" id="DiscorsoApologetico_Colombe" name="Names" value="DiscorsoApologetico_Colombe">
+                    <label for="DiscorsoApologetico_Colombe">DiscorsoApologetico_Colombe</label>
+                    <br>
+                    <input type="checkbox" id="DiscorsoAstrologico_Magini" name="Names" value="DiscorsoAstrologico_Magini">
+                    <label for="DiscorsoAstrologico_Magini">DiscorsoAstrologico_Magini</label>
+                    <br>
+                    <input type="checkbox" id="DiscorsoAstrologico_Roffeni" name="Names" value="DiscorsoAstrologico_Roffeni">
+                    <label for="DiscorsoAstrologico_Roffeni">DiscorsoAstrologico_Roffeni</label>
+                    <br>
+                    <input type="checkbox" id="DiscorsoComete_GuiducciGalilei" name="Names" value="DiscorsoComete_GuiducciGalilei">
+                    <label for="DiscorsoComete_GuiducciGalilei">DiscorsoComete_GuiducciGalilei</label>
+                    <br>
+                    <input type="checkbox" id="DiscorsoLodovico_Colombe" name="Names" value="DiscorsoLodovico_Colombe">
+                    <label for="DiscorsoLodovico_Colombe">DiscorsoLodovico_Colombe</label>
+                    <br>
+                    <input type="checkbox" id="Errori_Castelli" name="Names" value="Errori_Castelli">
+                    <label for="Errori_Castelli">Errori_Castelli</label>
+                    <br>
+                    <input type="checkbox" id="Esequie_Adimari" name="Names" value="Esequie_Adimari">
+                    <label for="Esequie_Adimari">Esequie_Adimari</label>
+                    <br>
+                    <input type="checkbox" id="Esercitationi_Rocco" name="Names" value="Esercitationi_Rocco">
+                    <label for="Esercitationi_Rocco">Esercitationi_Rocco</label>
+                    <br>
+                    <input type="checkbox" id="FantasticaVisione_Allegri" name="Names" value="FantasticaVisione_Allegri">
+                    <label for="FantasticaVisione_Allegri">FantasticaVisione_Allegri</label>
+                    <br>
+                    <input type="checkbox" id="FiesoleDistrutta_Peri" name="Names" value="FiesoleDistrutta_Peri">
+                    <label for="FiesoleDistrutta_Peri">FiesoleDistrutta_Peri</label>
+                    <br>
+                    <input type="checkbox" id="FloraFeconda_Costa" name="Names" value="FloraFeconda_Costa">
+                    <label for="FloraFeconda_Costa">FloraFeconda_Costa</label>
+                    <br>
+                    <input type="checkbox" id="GerusalemmeLiberata_TTasso" name="Names" value="GerusalemmeLiberata_TTasso">
+                    <label for="GerusalemmeLiberata_TTasso">GerusalemmeLiberata_TTasso</label>
+                    <br>
+                    <input type="checkbox" id="LamentoEmireno_Rasi" name="Names" value="LamentoEmireno_Rasi">
+                    <label for="LamentoEmireno_Rasi">LamentoEmireno_Rasi</label>
+                    <br>
+                    <input type="checkbox" id="Lettera_Foscarini" name="Names" value="Lettera_Foscarini">
+                    <label for="Lettera_Foscarini">Lettera_Foscarini</label>
+                    <br>
+                    <input type="checkbox" id="MacchieSolari_Galileo" name="Names" value="MacchieSolari_Galileo">
+                    <label for="MacchieSolari_Galileo">MacchieSolari_Galileo</label>
+                    <br>
+                    <input type="checkbox" id="MassimiSistemi_Galileo" name="Names" value="MassimiSistemi_Galileo">
+                    <label for="MassimiSistemi_Galileo">MassimiSistemi_Galileo</label>
+                    <br>
+                    <input type="checkbox" id="NA" name="Names" value="NA">
+                    <label for="NA">NA</label>
+                    <br>
+                    <input type="checkbox" id="Navigazione_Buonamico" name="Names" value="Navigazione_Buonamico">
+                    <label for="Navigazione_Buonamico">Navigazione_Buonamico</label>
+                    <br>
+                    <input type="checkbox" id="NuovaPrattica_Cavalieri" name="Names" value="NuovaPrattica_Cavalieri">
+                    <label for="NuovaPrattica_Cavalieri">NuovaPrattica_Cavalieri</label>
+                    <br>
+                    <input type="checkbox" id="NuoveScienze_Galileo" name="Names" value="NuoveScienze_Galileo">
+                    <label for="NuoveScienze_Galileo">NuoveScienze_Galileo</label>
+                    <br>
+                    <input type="checkbox" id="Operazioni_Galilei" name="Names" value="Operazioni_Galilei">
+                    <label for="Operazioni_Galilei">Operazioni_Galilei</label>
+                    <br>
+                    <input type="checkbox" id="Operetta_Coresios" name="Names" value="Operetta_Coresios">
+                    <label for="Operetta_Coresios">Operetta_Coresios</label>
+                    <br>
+                    <input type="checkbox" id="Orazione_Pieralli" name="Names" value="Orazione_Pieralli">
+                    <label for="Orazione_Pieralli">Orazione_Pieralli</label>
+                    <br>
+                    <input type="checkbox" id="Orlando_Ariosto" name="Names" value="Orlando_Ariosto">
+                    <label for="Orlando_Ariosto">Orlando_Ariosto</label>
+                    <br>
+                    <input type="checkbox" id="Palladio_Bocchineri" name="Names" value="Palladio_Bocchineri">
+                    <label for="Palladio_Bocchineri">Palladio_Bocchineri</label>
+                    <br>
+                    <input type="checkbox" id="PoesieSopra_Giunti" name="Names" value="PoesieSopra_Giunti">
+                    <label for="PoesieSopra_Giunti">PoesieSopra_Giunti</label>
+                    <br>
+                    <input type="checkbox" id="Polemidoro_Gualterotti" name="Names" value="Polemidoro_Gualterotti">
+                    <label for="Polemidoro_Gualterotti">Polemidoro_Gualterotti</label>
+                    <br>
+                    <input type="checkbox" id="Polinnia_Adimari" name="Names" value="Polinnia_Adimari">
+                    <label for="Polinnia_Adimari">Polinnia_Adimari</label>
+                    <br>
+                    <input type="checkbox" id="Radio_Orsini" name="Names" value="Radio_Orsini">
+                    <label for="Radio_Orsini">Radio_Orsini</label>
+                    <br>
+                    <input type="checkbox" id="Ragionamento_Giovio" name="Names" value="Ragionamento_Giovio">
+                    <label for="Ragionamento_Giovio">Ragionamento_Giovio</label>
+                    <br>
+                    <input type="checkbox" id="Relazione_Coppola" name="Names" value="Relazione_Coppola">
+                    <label for="Relazione_Coppola">Relazione_Coppola</label>
+                    <br>
+                    <input type="checkbox" id="Risposta_Galileo" name="Names" value="Risposta_Galileo">
+                    <label for="Risposta_Galileo">Risposta_Galileo</label>
+                    <br>
+                    <input type="checkbox" id="RispostePiacevoli_Colombe" name="Names" value="RispostePiacevoli_Colombe">
+                    <label for="RispostePiacevoli_Colombe">RispostePiacevoli_Colombe</label>
+                    <br>
+                    <input type="checkbox" id="SambucaLincea_Colonna" name="Names" value="SambucaLincea_Colonna">
+                    <label for="SambucaLincea_Colonna">SambucaLincea_Colonna</label>
+                    <br>
+                    <input type="checkbox" id="Scandaglio_Stelluti" name="Names" value="Scandaglio_Stelluti">
+                    <label for="Scandaglio_Stelluti">Scandaglio_Stelluti</label>
+                    <br>
+                    <input type="checkbox" id="Sfera_Piccolomini" name="Names" value="Sfera_Piccolomini">
+                    <label for="Sfera_Piccolomini">Sfera_Piccolomini</label>
+                    <br>
+                    <input type="checkbox" id="SferaCeleste_Ptolemy" name="Names" value="SferaCeleste_Ptolemy">
+                    <label for="SferaCeleste_Ptolemy">SferaCeleste_Ptolemy</label>
+                    <br>
+                    <input type="checkbox" id="Sogno_Nozzolini" name="Names" value="Sogno_Nozzolini">
+                    <label for="Sogno_Nozzolini">Sogno_Nozzolini</label>
+                    <br>
+                    <input type="checkbox" id="SpecchioConcavo_Magini" name="Names" value="SpecchioConcavo_Magini">
+                    <label for="SpecchioConcavo_Magini">SpecchioConcavo_Magini</label>
+                    <br>
+                    <input type="checkbox" id="SpecchioUstorio_Cavalieri" name="Names" value="SpecchioUstorio_Cavalieri">
+                    <label for="SpecchioUstorio_Cavalieri">SpecchioUstorio_Cavalieri</label>
+                    <br>
+                    <input type="checkbox" id="Stanze_Figliucci" name="Names" value="Stanze_Figliucci">
+                    <label for="Stanze_Figliucci">Stanze_Figliucci</label>
+                    <br>
+                    <input type="checkbox" id="Superficie_Bagdadi" name="Names" value="Superficie_Bagdadi">
+                    <label for="Superficie_Bagdadi">Superficie_Bagdadi</label>
+                    <br>
+                    <input type="checkbox" id="Telescopio_Stelliola" name="Names" value="Telescopio_Stelliola">
+                    <label for="Telescopio_Stelliola">Telescopio_Stelliola</label>
+                    <br>
+                    <input type="checkbox" id="Theoriche_Donati" name="Names" value="Theoriche_Donati">
+                    <label for="Theoriche_Donati">Theoriche_Donati</label>
+                    <br>
+                    <input type="checkbox" id="ToscanaFestosa_Casini" name="Names" value="ToscanaFestosa_Casini">
+                    <label for="ToscanaFestosa_Casini">ToscanaFestosa_Casini</label>
+                    <br>
+                    <input type="checkbox" id="Vernata_Magagnati" name="Names" value="Vernata_Magagnati">
+                    <label for="Vernata_Magagnati">Vernata_Magagnati</label>
+                    <br>
+                    <input type="checkbox" id="VitaAlessandro_Loredan" name="Names" value="VitaAlessandro_Loredan">
+                    <label for="VitaAlessandro_Loredan">VitaAlessandro_Loredan</label>
+                    <br>
                 </div>
                 <hr>
-                <button id="button">Apply</button>
+                <button type="button" id="cButton">Apply</button>
             </form>
 
+            <div id="vis-container">
+                <div id="visualOne"><img src="../data/author.png" alt="Image Example of the d3 representation of the author value" id="imageVisOne"></div>
+                <div id="visualTwo"><img src="../data/author.png" alt="Image Example of the d3 representation of the author value" id="imageVisTwo"></div>
+            </div>
         </main>
         <hr>
         <footer>

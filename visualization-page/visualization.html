@@ -28,15 +28,12 @@
                 <input type="text" name="section" id="section" required>
                 <label for="type-class">Type: </label>
                 <select id="type-class">
-                    <option value="RawFreqLibrary">Raw Frequency</option>
-                    <option value="RelFreqLibrary">Relative Frequency</option>
+                    <option value="RawSaggFreq">Raw Frequency</option>
+                    <option value="RelSaggFreq">Relative Frequency</option>
                     <option value="EarliestAppearance">Oldest Use</option>
-                    <option value="RP">Part of Speech</option>
-                    <option value="CC">Tense</option>
-                    <option value="IN">IN</option>
-                    <option value="VB">VB</option>
-                    <option value="PRP">PRP</option>
-
+                    <option value="WordClass">Part of Speech</option>
+                    <option value="Tense">Tense</option>
+                    <option value="NamesTextsAppearedIn">Authors</option>
                 </select>
                 <!-- <input type="button" value="Apply" id="button-el"> <button id="button-el">Apply</button> -->
                 <button type="button" id="button-el">Apply</button>
@@ -44,15 +41,27 @@
             <div id="container">
                 <div class = "image-div">
                     <p class="image-description">Raw Frequency: </p>
-                    <img src="../data/raw-frequency.png" class="image-vis">
+                    <img src="../data/raw-frequency.png" alt="Image Example of the d3 representation of the raw frequency value" class="image-vis">
                 </div>
                 <div class = "image-div">
                     <p class="image-description">Relative Frequency: </p>
-                    <img src="../data/rel-frequency.png" class="image-vis">
+                    <img src="../data/rel-frequency.png" alt="Image Example of the d3 representation of the relative frequency value" class="image-vis">
                 </div>
                 <div class = "image-div">
                     <p class="image-description">Oldest Use: </p>
-                    <img src="../data/oldest-use.png" class="image-vis">
+                    <img src="../data/oldest-use.png" alt="Image Example of the d3 representation of the oldest use value" class="image-vis">
+                </div>
+                <div class = "image-div">
+                    <p class="image-description">Part of Speech: </p>
+                    <img src="../data/part-of-speech.png" alt="Image Example of the d3 representation of the part of speech value" class="image-vis">
+                </div>
+                <div class = "image-div">
+                    <p class="image-description">Tense: </p>
+                    <img src="../data/tense.png" alt="Image Example of the d3 representation of the tense value" class="image-vis">
+                </div>
+                <div class = "image-div">
+                    <p class="image-description">Authors: </p>
+                    <img src="../data/author.png" alt="Image Example of the d3 representation of the author value" class="image-vis">
                 </div>
             </div>
             <div id="visual" style="position: relative; align-self: center; margin-top: 10px;"></div>
