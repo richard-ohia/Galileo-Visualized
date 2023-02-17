@@ -63,7 +63,7 @@ buttonEl.addEventListener("click", () => {
     const metadataType = document.getElementById("type-class").value;
 
 
-    if(((sectionOne < 24 && sectionOne >= 0) && sectionOne !== "") && ((sectionTwo < 24 && sectionTwo >= 0) && sectionTwo !== "")) {
+    if(((sectionOne < 54 && sectionOne >= 0) && sectionOne !== "") && ((sectionTwo < 54 && sectionTwo >= 0) && sectionTwo !== "")) {
         let imageVisOne = document.getElementById("imageVisOne");
         let imageVisTwo = document.getElementById("imageVisTwo");
 
@@ -83,7 +83,7 @@ buttonEl.addEventListener("click", () => {
         }
 
     } else {
-        alert("Both sections must be between 0 - 23");
+        alert("Both sections must be between 0 - 53");
     }
 
 });
@@ -335,15 +335,16 @@ function splitAccess(section, metadataType, visual) {
             .enter().each(function (d, i) {
             dataSplit = (d[metadataType]).split(";");
             d[metadataType] = dataSplit;
+            let unChecked = false
             for (let j = 0; j < dataSplit.length; j++) {
                 dataSplit[j] = dataSplit[j].trim();
                 if(!checkbox.includes(dataSplit[j])) {
-                    console.log(dataSplit[j]);
-                    break;
+                    unChecked = true;
                 }
                 d3.select(this).append('rect')
                 .attr('fill', function(d) {
-                return  "#" + intToRGB(hashCode(dataSplit[j]));
+                    const hex = unChecked ? "808080" : intToRGB(hashCode(dataSplit[j]));
+                return  "#" + hex;
                 })
                 .attr('width', '10px')
                 .attr('height', '10px')

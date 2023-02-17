@@ -10,7 +10,7 @@ buttonEl.addEventListener("click", () => {
   const section = document.getElementById("section").value;
   const metadataType = document.getElementById("type-class").value;
   
-  if((section < 24 && section >= 0) && section !== "") {
+  if((section < 54 && section >= 0) && section !== "") {
     let containerEl = document.getElementById("container");
     if(containerEl !== null) {
       containerEl.remove();
@@ -25,7 +25,7 @@ buttonEl.addEventListener("click", () => {
     }
 
   } else {
-    alert("Please Enter a Section Between 0 - 23");
+    alert("Please Enter a Section Between 0 - 53");
   }
 
 });
